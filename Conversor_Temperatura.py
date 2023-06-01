@@ -21,18 +21,19 @@ print("--------------------------------------")
 def Converter_Temperatura():
     continuar = True
     while (continuar):
-        print("Escolha qual temperatura você quer converter:")
-        print("(1) Celcius (2) Fahrenheit (3) Kelvin")
+        print("Escolha qual temperatura você quer converter:\n" + "(1) Celcius \n" + "(2) Fahrenheit \n" + "(3) Kelvin")
         
         #Erro
         try:
             temperatura = int(input("Digite o número da temperatura desejada: "))
             if (temperatura < 1 or temperatura > 3):
+                print("--------------------------------------")
                 print("Digite uma opção válida")
                 print("--------------------------------------")
                 continue
 
-        except ValueError: 
+        except ValueError:
+            print("--------------------------------------") 
             print("Digite um número válido")
             print("--------------------------------------")
             continue
@@ -62,17 +63,17 @@ def Converter_Temperatura():
             print(f"A temperatura em Kelvin é {Kelvin:.2f}K. A temperatura em Celcius é {Celcius:.2f}°C. A temperatura em Fahrenheit é {Fahrenheit:.2f}°F")
             print("--------------------------------------")
 
-        #Ver denovo -- Erro
-        try:
-            afirmacao = int(input("Deseja ver novamente? Digite 1 para Sim e 2 para Não: "))
-            if afirmacao != 1:
+        #Ver denovo
+        while True:
+            afirmacao = input("Deseja ver novamente? Digite: \n" + "(1) para Sim \n" + "(2) para Não\n" + "Opção: ")
+            if afirmacao == '1':
+                break
+            elif afirmacao == '2':
                 continuar = False
-
-            elif (afirmacao == 1): 
-                continuar == True
-        except ValueError: 
-            if (afirmacao < 1 or afirmacao >2):
-                print("Digite um número ou opção válida")
+                break
+            else:
                 print("--------------------------------------")
-                continue
+                print("Digite uma opção válida (1 para Sim ou 2 para Não)")
+                print("--------------------------------------")
+
 Converter_Temperatura()
