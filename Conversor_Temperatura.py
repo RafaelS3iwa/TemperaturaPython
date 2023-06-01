@@ -1,54 +1,78 @@
+#Funcoes de Calculo
+def Celcius_to_Kelvin_Fahrenheit(Celcius):
+    Fahrenheit = (Celcius * 1.8) + 32 
+    Kelvin = Celcius + 273.15
+    return Fahrenheit, Kelvin
+
+def Fahrenheit_to_Celcius_Kelvin(Fahrenheit):
+    Celcius = (Fahrenheit - 32) / 1.8
+    Kelvin = (Fahrenheit - 32) * 5/9 + 273.15
+    return Celcius, Kelvin
+
+def Kelvin_to_Celcius_Fahrenheit(Kelvin):
+    Celcius = Kelvin - 273.15 
+    Fahrenheit = (Kelvin - 273.15) * 1.8 + 32
+    return Celcius, Fahrenheit
+
+#Comeco do programa
 print("Bem vindo ao conversor de temperatura!")
 print("--------------------------------------")
-continuar = True
 
-while(continuar):
-    print("Escolha qual temperatura você quer converter:")
-    print("(1) Celcius (2) Fahrenheit (3) Kelvin")
-    temperatura = int (input("Defina a temperatura: "))
-    if(temperatura > 3):
-        print("Digite uma temperatura válida.")
-        print("--------------------------------------")
-        continue
-
-    if(temperatura == 1):
-        print("--------------------------------------")
-        Celcius = float (input("Digite a temperatura: "))
+def Converter_Temperatura():
+    continuar = True
+    while (continuar):
+        print("Escolha qual temperatura você quer converter:")
+        print("(1) Celcius (2) Fahrenheit (3) Kelvin")
         
-        Fahrenheit = (Celcius * 1.8) + 32 
-        Kelvin = Celcius + 273.15
-        
-        print("A temperatura em Celcius é {}°C. A temperatura em Fahrenheit é {:.2f}°F. A temperatura em Kelvin é {:.2f}K.".format(Celcius, Fahrenheit, Kelvin))
-        print("--------------------------------------")
-        
-    elif(temperatura == 2):
-        print("--------------------------------------")
-        Fahrenheit = float(input("Digite a temperatura: "))
+        #Erro
+        try:
+            temperatura = int(input("Digite o número da temperatura desejada: "))
+            if (temperatura < 1 or temperatura > 3):
+                print("Digite uma opção válida")
+                print("--------------------------------------")
+                continue
 
-        Celcius = (Fahrenheit - 32) / 1.8
-        Kelvin = (Fahrenheit - 32) * 5/9 + 273.15
+        except ValueError: 
+            print("Digite um número válido")
+            print("--------------------------------------")
+            continue
 
-        print("A temperatura em Fahrenheit é {}°F. A temperatura em Celcius é {:.2f}°C. A temperatura em Kelvin é {:.2f}K.".format(Fahrenheit, Celcius, Kelvin))
-        print("--------------------------------------")
+        #Celcius
+        if(temperatura == 1):
+            print("--------------------------------------")
+            Celcius = float(input("Digite a temperatura: "))
+            Fahrenheit, Kelvin = Celcius_to_Kelvin_Fahrenheit(Celcius)
+            print(f"A temperatura em Celcius é {Celcius:.2f}°C. A temperatura em Fahrenheit é {Fahrenheit:.2f}°F. A temperatura em Kelvin é {Kelvin:.2f}K.")
+            print("--------------------------------------")
 
-    else:
-        print("--------------------------------------")
-        Kelvin = float(input("Digite a temperatura: "))
+        #Fahrenheit
+        elif(temperatura == 2):
+            print("--------------------------------------")
+            Fahrenheit = float(input("Digite a temperatura: "))
+            Celcius, Kelvin = Fahrenheit_to_Celcius_Kelvin(Fahrenheit)
+            print(f"A temperatura em Fahrenheit é {Fahrenheit:.2f}°F. A temperatura em Celcius é {Celcius:.2f}°C. A temperatura em Kelvin é {Kelvin:.2f}K.")
+            print("--------------------------------------")
 
-        Celcius = Kelvin - 273.15 
-        Fahrenheit = (Kelvin - 273.15) * 1.8 + 32
 
-        print("A temperatura em Kelvin é {}K. A temperatura em Celcius é {:.2f}°C. A temperatura em Fahrenheit é {:.2f}°F".format(Kelvin, Celcius, Fahrenheit))
-        print("--------------------------------------")
+        #Kelvin
+        elif(temperatura == 3):
+            print("--------------------------------------")
+            Kelvin = float(input("Digite a temperatura: "))
+            Celcius, Fahrenheit = Kelvin_to_Celcius_Fahrenheit(Kelvin)
+            print(f"A temperatura em Kelvin é {Kelvin:.2f}K. A temperatura em Celcius é {Celcius:.2f}°C. A temperatura em Fahrenheit é {Fahrenheit:.2f}°F")
+            print("--------------------------------------")
 
-    print("Deseja ver novamente? (1) Sim (2) Não")
-    afirmacao = int (input("Digite 1 para Sim e 2 para Não: "))
-    if (afirmacao.upper() > 2): 
-        print("--------------------------------------")
-        print("Digite um número válido")
-        continue
-    if (afirmacao.upper() == 1):
-        print("--------------------------------------")
-    elif(afirmacao.upper() == 2):
-        break
-        
+        #Ver denovo -- Erro
+        try:
+            afirmacao = int(input("Deseja ver novamente? Digite 1 para Sim e 2 para Não: "))
+            if afirmacao != 1:
+                continuar = False
+
+            elif (afirmacao == 1): 
+                continuar == True
+        except ValueError: 
+            if (afirmacao < 1 or afirmacao >2):
+                print("Digite um número ou opção válida")
+                print("--------------------------------------")
+                continue
+Converter_Temperatura()
